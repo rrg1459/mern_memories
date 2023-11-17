@@ -1,0 +1,12 @@
+ $ yarn init -y
+
+ $ yarn add "body-parser@1.19.0"
+ $ yarn add "cors@2.8.5"
+ $ yarn add "express@4.17.1"
+ $ yarn add "mongoose@5.9.29"
+
+ $ yarn add --dev "nodemon@2.0.6"
+
+ $ yarn add "dotenv@16.3.1"
+
+ $ yarn start
