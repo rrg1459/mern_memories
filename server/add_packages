@@ -9,4 +9,7 @@
 
  $ yarn add "dotenv@16.3.1"
 
+ $ yarn add "bcryptjs@2.4.3"
+ $ yarn add "jsonwebtoken@8.5.1"
+ 
  $ yarn start
