@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
+
 import useStyles from './styles';
 import Input from './Input';
 
@@ -10,13 +15,40 @@ export const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const [isSignup, setIsSignup] = useState(false);
+  const dispatch = useDispatch();
+
+  const history = useHistory();
 
   const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
-
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
     handleShowPassword(false)
   };
+
+  const googleSuccess = (res) => {
+    const decoded = jwt_decode(res?.credential);
+    const result = {
+      _id: decoded.sub,
+      _type: 'user',
+      userName: decoded.name,
+      name: decoded.given_name,
+      exp: decoded.exp,
+      image: decoded.picture
+    }
+
+    try {
+      dispatch({type: 'AUTH', data: { result }});
+      history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const googleError = (error) => {
+    console.log(error);
+    console.log('Google Sign In was unsuccessful. Try again later');
+  }
+
   const handleSubmit = () => {};
   const handleChange = () => {};
 
@@ -42,6 +74,10 @@ export const Auth = () => {
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
             { isSignup ? 'Sign Up' : 'Sign In' }
           </Button>
+          <GoogleLogin
+            onSuccess={googleSuccess}
+            onFailure={googleError}
+          />
           <Grid container justify="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
