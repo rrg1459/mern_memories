@@ -19,5 +19,6 @@ $ yarn add "jwt-decode@3.1.2"
 $ yarn add "react-router-dom@5.2.0"
 $ yarn add "@react-oauth/google@0.12.1"
 
+ $ yarn add "dotenv@16.3.1"
 
  $ yarn start
