@@ -7,10 +7,8 @@ import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import { Auth } from './components/Auth/Auth';
 
-console.log('xxx process.env-->: ', process.env);
-
 const App = () => (
-  <GoogleOAuthProvider clientId='197370610713-p9ga128lfg6ur5f1h8otloc2lg95bgg5.apps.googleusercontent.com'>
+  <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
     <BrowserRouter>
       <Container maxWidth="lg">
         <Navbar />
@@ -24,5 +22,3 @@ const App = () => (
 );
 
 export default App;
-
-// 26:12
