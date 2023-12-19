@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
+import jwt from "jsonwebtoken";
 
 import useStyles from './styles';
 import Input from './Input';
@@ -50,8 +51,11 @@ export const Auth = () => {
       image: decoded.picture
     }
 
+    const token = jwt.sign({ email: result.email, id: result._id }, 'test', { expiresIn: "1h" });
+
+
     try {
-      dispatch({ type: 'AUTH', data: { result } });
+      dispatch({ type: 'AUTH', data: { result, token } });
       history.push('/');
     } catch (error) {
       console.error(error);
