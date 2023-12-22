@@ -23,4 +23,8 @@ $ yarn add "@react-oauth/google@0.12.1"
 
  $ yarn add "jsonwebtoken@8.5.1"
 
+
+ $ yarn add "material-ui/lab@4.0.0-alpha.58" // for pagination and others
+ $ yarn add "material-ui-chip-input@1.1.0"
+
  $ yarn start
