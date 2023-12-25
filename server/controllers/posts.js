@@ -11,6 +11,16 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getPostsBySearch = async (searchQuery) => {
+
+  try {
+    const { data } = await api.fetchPostsBySearch(searchQuery);
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export const createPost = async (req, res) => {
 
   const post = req.body;
