@@ -35,6 +35,11 @@ const Post = ({ post, setCurrentId }) => {
     history.push(`/posts/${post._id}`);
   };
 
+  const editPost = (e) => {
+    e.stopPropagation();
+    setCurrentId(post._id);
+  };
+
   return (
     <Card className={classes.card} raised elevation={6}>
       <ButtonBase
@@ -48,7 +53,7 @@ const Post = ({ post, setCurrentId }) => {
         </div>
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
           <div className={classes.overlay2}>
-            <Button onClick={() => setCurrentId(post._id)} style={{ color: 'white' }} size="small">
+            <Button onClick={editPost} style={{ color: 'white' }} size="small">
               <MoreHorizIcon fontSize="default" />
             </Button>
           </div>
