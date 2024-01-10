@@ -1,14 +1,23 @@
 import React, { useState, useRef } from 'react';
 import { Typography, TextField, Button } from '@material-ui/core/';
+import { useDispatch } from 'react-redux';
 
+import { commentPost } from '../../actions/posts';
 import useStyles from './styles';
 
 const CommentSection = ({ post }) => {
+  const user = JSON.parse(localStorage.getItem('profile'));
+  const dispatch = useDispatch();
   const [comments, setComments] = useState([1, 2, 3, 4]);
   const [comment, setComment] = useState('');
   const classes = useStyles();
 
-  const handleComment = () => { };
+
+  const handleComment = () => {
+    const finalComment = `${user.result.name}: ${comment}`;
+
+    dispatch(commentPost(finalComment, post._id));
+  };
 
   return (
     <div>
