@@ -52,10 +52,8 @@ const Post = ({ post, setCurrentId }) => {
           <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
         </div>
         {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
-          <div className={classes.overlay2}>
-            <Button onClick={editPost} style={{ color: 'white' }} size="small">
-              <MoreHorizIcon fontSize="default" />
-            </Button>
+          <div className={classes.overlay2} onClick={editPost} style={{ color: 'white' }} size="small">
+            <MoreHorizIcon fontSize="default" />
           </div>
         )}
         <div className={classes.details}>
