@@ -8,15 +8,19 @@ import useStyles from './styles';
 const CommentSection = ({ post }) => {
   const user = JSON.parse(localStorage.getItem('profile'));
   const dispatch = useDispatch();
-  const [comments, setComments] = useState([1, 2, 3, 4]);
+  const [comments, setComments] = useState(post?.comments);
+
   const [comment, setComment] = useState('');
   const classes = useStyles();
 
 
-  const handleComment = () => {
+  const handleClick = async () => {
     const finalComment = `${user.result.name}: ${comment}`;
 
-    dispatch(commentPost(finalComment, post._id));
+    const newComments = await dispatch(commentPost(finalComment, post._id));
+
+    setComment('');
+    setComments(newComments);
   };
 
   return (
@@ -26,7 +30,7 @@ const CommentSection = ({ post }) => {
           <Typography gutterBottom variant="h6">Comments</Typography>
           {comments?.map((c, i) => (
             <Typography key={i} gutterBottom variant="subtitle1">
-              Comment {i}
+              {c}
             </Typography>
           ))}
         </div>
@@ -43,7 +47,7 @@ const CommentSection = ({ post }) => {
               onChange={(e) => setComment(e.target.value)}
             />
             <br />
-            <Button style={{ marginTop: '10px' }} fullWidth disabled={!comment} color="primary" variant="contained" onClick={handleComment}>
+            <Button style={{ marginTop: '10px' }} fullWidth disabled={!comment} color="primary" variant="contained" onClick={handleClick}>
               Comment
             </Button>
           </div>
